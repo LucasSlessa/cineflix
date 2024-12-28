@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINNEFLIX - Streaming de Filmes e Séries</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary: #e50914;
+            --secondary: #141414;
+            --text: #ffffff;
+            --background: #000000;
+            --card-bg: rgba(20, 20, 20, 0.95);
+        }
+
+        .dark {
+            --primary: #e50914;
+            --secondary: #141414;
+            --text: #ffffff;
+            --background: #000000;
+            --card-bg: rgba(20, 20, 20, 0.95);
+        }
+
+        .light {
+            --primary: #e50914;
+            --secondary: #f8f9fa;
+            --text: #141414;
+            --background: #ffffff;
+            --card-bg: rgba(248, 249, 250, 0.95);
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .netflix-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease;
+        }
+
+        .netflix-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, var(--background), var(--secondary));
+            opacity: 0.8;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), #ff4b2b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Custom Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="dark">
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 backdrop-blur-md bg-opacity-90" style="background: var(--card-bg)">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-3xl font-bold gradient-text">CINNEFLIX</div>
+                <div class="flex items-center space-x-6">
+                    <button id="themeToggle" class="text-2xl">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="#pricing" class="btn-primary">Assinar Agora</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-20">
+        <div class="container mx-auto px-6 py-20">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2" data-aos="fade-right">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+                        Seu entretenimento começa aqui
+                    </h1>
+                    <p class="text-xl mb-8">
+                        Filmes, séries e muito mais. Sem limites. Assista onde quiser.
+                    </p>
+                    <a href="#pricing" class="btn-primary inline-block">
+                        Comece Agora
+                    </a>
+                </div>
+                <div class="md:w-1/2 mt-10 md:mt-0" data-aos="fade-left">
+                    <img src="https://i1.sndcdn.com/artworks-n283WhFD5UqdT2lJ-zRnocw-t500x500.jpg" alt="Streaming" class="rounded-lg shadow-2xl float-animation">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-20 bg-opacity-50" style="background: var(--card-bg)">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">
+                Por que escolher CINNEFLIX?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="netflix-card p-8 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-tv feature-icon"></i>
+                    <h3 class="text-xl font-bold mb-4">Qualidade Ultra HD</h3>
+                    <p>Assista seus filmes e séries favoritos em qualidade 4K impressionante.</p>
+                </div>
+                <div class="netflix-card p-8 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-mobile-alt feature-icon"></i>
+                    <h3 class="text-xl font-bold mb-4">Assista em qualquer lugar</h3>
+                    <p>Disponível em smartphones, tablets, Smart TVs e notebooks.</p>
+                </div>
+                <div class="netflix-card p-8 text-center" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-download feature-icon"></i>
+                    <h3 class="text-xl font-bold mb-4">Downloads ilimitados</h3>
+                    <p>Baixe seus conteúdos favoritos e assista offline.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">
+                Escolha seu plano
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Monthly Plan -->
+                <div class="netflix-card p-8 relative" data-aos="fade-up" data-aos-delay="100">
+                    <span class="pricing-badge">Popular</span>
+                    <h3 class="text-2xl font-bold mb-4">Plano Mensal</h3>
+                    <div class="text-3xl font-bold mb-6">
+                        <span class="text-sm line-through">R$197,00</span>
+                        <br>
+                        R$34,90<span class="text-sm">/mês</span>
+                    </div>
+                    <ul class="mb-8 space-y-4">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Acesso ilimitado</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>HD disponível</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Cancele quando quiser</li>
+                    </ul>
+                    <a href="https://pay.kirvano.com/bba1e0c7-ef4b-4b3b-8629-1948cd9f8bbc?aff=79f8a9a9-ea7a-4240-bc67-62340e3d8607" 
+                       class="btn-primary block text-center">
+                        Assinar Agora
+                    </a>
+                </div>
+
+                <!-- Quarterly Plan -->
+                <div class="netflix-card p-8 relative" data-aos="fade-up" data-aos-delay="200">
+                    <span class="pricing-badge">Economia</span>
+                    <h3 class="text-2xl font-bold mb-4">Plano Trimestral</h3>
+                    <div class="text-3xl font-bold mb-6">
+                        <span class="text-sm line-through">R$247,00</span>
+                        <br>
+                        R$59,90<span class="text-sm">/trimestre</span>
+                    </div>
+                    <ul class="mb-8 space-y-4">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Acesso ilimitado</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>HD + Ultra HD</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Maior economia</li>
+                    </ul>
+                    <a href="https://pay.kirvano.com/6c7f9414-ad84-4f06-bd49-e2cb75cde671?aff=79f8a9a9-ea7a-4240-bc67-62340e3d8607" 
+                       class="btn-primary block text-center">
+                        Assinar Agora
+                    </a>
+                </div>
+
+                <!-- Annual Plan -->
+                <div class="netflix-card p-8 relative" data-aos="fade-up" data-aos-delay="300">
+                    <span class="pricing-badge">Melhor Valor</span>
+                    <h3 class="text-2xl font-bold mb-4">Plano Anual</h3>
+                    <div class="text-3xl font-bold mb-6">
+                        <span class="text-sm line-through">R$499,00</span>
+                        <br>
+                        R$187,00<span class="text-sm">/ano</span>
+                    </div>
+                    <ul class="mb-8 space-y-4">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Acesso ilimitado</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Máxima qualidade</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Maior desconto</li>
+                    </ul>
+                    <a href="https://pay.kirvano.com/8161e619-071a-4d9f-a073-5d86e2664cbe?aff=79f8a9a9-ea7a-4240-bc67-62340e3d8607" 
+                       class="btn-primary block text-center">
+                        Assinar Agora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-opacity-50" style="background: var(--card-bg)">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">
+                O que nossos clientes dizem
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="netflix-card p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/50/50?random=2" alt="User" class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Evellyn Yasmin</h4>
+                            <div class="text-yellow-500">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"Eu amei o App, tem todos os filmes e séries que eu amo, sem contar na qualidade, é incrível!!!!"</p>
+                </div>
+                <div class="netflix-card p-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/50/50?random=3" alt="User" class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Rafael Palhares</h4>
+                            <div class="text-yellow-500">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"Nunca achei que poderia ver todos os meus programas em um único app, muuuito top. Parabéns ai a equipe Cinneflix"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-2xl font-bold gradient-text mb-6 md:mb-0">CINNEFLIX</div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-primary transition-colors">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="hover:text-primary transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="hover:text-primary transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-sm opacity-75">
+                © 2024 CINNEFLIX. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
